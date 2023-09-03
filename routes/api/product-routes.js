@@ -11,7 +11,7 @@ router.get('/', async(req, res) => {
       // be sure to include its associated Category and Tag data
       include: [{ model: Category, }, { model: Tag, }],
     });
-    res.json(products);
+    res.status(200).json(products);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
     if (!productsById) {
       res.status(404).json({ message: 'No Products found with this id!' });
     }
-    res.json(productsById);
+    res.status(200).json(productsById);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -123,7 +123,6 @@ router.delete('/:id', async (req, res) => {
       res.status(404).json({ message: 'No Product found with this id!' });
       return;
     }
-
     res.status(200).json(deleteProduct);
   } catch (err) {
     res.status(500).json(err);
